@@ -1,0 +1,26 @@
+- add multi client game mode 
+
+what needed?
+- server
+- has game state
+- actions: accepting a coordinate from a specific player for a specific game 
+- send back new game state to both players (websockets?)
+-> or players can get new game state regularly
+
+-options to create (reset, create new game), read (get games state), update (join & make moves, reset (maube just same as create new game?)), delete games 
+
+const gameState = {
+    gameId: "",
+    board: [],
+    currentPlayer: "X", 
+    player1: {token: "x", id: ""},
+    player2: {token: "x", id: ""},
+    winState
+
+}
+
+- client 
+- fetches game state (websockets, long polling)
+- new lobby page to view all games that need more players 
+- start a new game & let people join that 
+- win modal (hit the server and create new game with the same players)
