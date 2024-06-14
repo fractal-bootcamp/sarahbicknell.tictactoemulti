@@ -115,52 +115,28 @@ export default function GameBoard() {
     return <div>Loading...</div>;
   }
 
-  let status;
-  if (game.winState.winner) {
-    status = `Winner: ${game.winState.winner}`;
+  const winner = game.winState.winner;
+  let winnerName;
+  if (winner === "X"){
+  winnerName = "Tank"
+  } else if (winner === "O") {
+    winnerName = "Toe"
+  }
+  let status; 
+  if (winner) {
+    status = (winnerName=="Tank"? "🎉🪖" : "🎉😼" ) + winnerName + " wins!" + (winnerName=="Tank"? "🪖🎉" : "😼🎉" )
+  } else if (game.winState.outcome === "draw") {
+    status = "💥😾Git gud noobs!😾💥"
   } else {
-    status = `Next Player: ${game.currentPlayer}`;
+    //i should update this to be more clear probably 
+    status = (game.currentPlayer === "X" ? "Tank" : "Toe") + " goes next" + (game.currentPlayer === "X"? "🪖" : "😼" )
   }
 
-
-
-  // function handleClick(i: number) { 
-  //   if (squares[i] || winner) {
-  //     return
-  //   }
-  //   else {
-  //     const nextSquares = squares.slice();
-  //     if (nextPlayer) {
-  //     nextSquares[i] = "X" ;
-  //     } else {
-  //     nextSquares[i] = "O";
-  //     }
-  //     setNextPlayer(!nextPlayer)
-  //     setSquares(nextSquares) }
-  // }
-
-  // const winState = checkWinCondition({board: squares})
-  // const winner = winState.winner
-  // let winnerName;
-  // if (winner == "X"){
-  //   winnerName = "Tank"
-  // } else if (winner == "O") {
-  //   winnerName = "Toe"
-  // }
-  // let status; 
-  // if (winner) {
-  //   status = (winnerName=="Tank"? "🎉🪖" : "🎉😼" ) + winnerName + " wins!" + (winnerName=="Tank"? "🪖🎉" : "😼🎉" )
-  // } else if (winState.outcome == "draw") {
-  //   status = "💥😾Git gud noobs!😾💥"
-  // } else {
-  //   //i should update this to be more clear probably 
-  //   status = (nextPlayer ? "Tank" : "Toe") + " goes next" + (nextPlayer? "🪖" : "😼" )
-  // }
-  
 return (      
     <div className="page">
       <div className="game">
         <h1 className="title "> Pink Tank Toe !</h1>
+            <div className="status"> {status} </div>
             <div className="board-row">
               <Square value={game.board[0]} onSquareClick={() => handleSquareClick(0)} /> 
               <Square value={game.board[1]} onSquareClick={() => handleSquareClick(1)}/> 
